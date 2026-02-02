@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option 6: Retro Bowling Alley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --mets-blue: #002D72;
+            --mets-orange: #FF5910;
+            --cream: #FDF6E3;
+            --lane-wood: #D4A574;
+            --neon-pink: #FF6B9D;
+            --neon-yellow: #FFE66D;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--mets-blue);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Bowling lane stripes */
+        .lane-bg {
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                rgba(212, 165, 116, 0.03) 0px,
+                rgba(212, 165, 116, 0.03) 60px,
+                rgba(212, 165, 116, 0.06) 60px,
+                rgba(212, 165, 116, 0.06) 120px
+            );
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+        }
+
+        /* Neon sign header */
+        header {
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        .neon-border {
+            position: absolute;
+            inset: 20px;
+            border: 4px solid var(--mets-orange);
+            border-radius: 20px;
+            box-shadow:
+                0 0 10px var(--mets-orange),
+                0 0 20px var(--mets-orange),
+                inset 0 0 10px rgba(255, 89, 16, 0.1);
+            animation: flicker 4s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+            96% { opacity: 0.9; }
+            97% { opacity: 1; }
+        }
+
+        .pins-decoration {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .pin {
+            width: 20px;
+            height: 40px;
+            background: var(--cream);
+            border-radius: 50% 50% 40% 40% / 30% 30% 70% 70%;
+            position: relative;
+        }
+
+        .pin::after {
+            content: '';
+            position: absolute;
+            top: 30%;
+            left: 20%;
+            right: 20%;
+            height: 25%;
+            background: var(--mets-orange);
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3.5rem, 12vw, 7rem);
+            letter-spacing: 0.05em;
+            color: var(--cream);
+            text-shadow:
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink),
+                0 0 40px var(--neon-pink);
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 10px var(--neon-yellow);
+            margin-bottom: 24px;
+        }
+
+        .score-display {
+            display: inline-flex;
+            gap: 4px;
+            background: #111;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: 2px solid #333;
+        }
+
+        .score-digit {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--mets-orange);
+            background: #1a1a1a;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-shadow: 0 0 10px var(--mets-orange);
+        }
+
+        .score-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 8px;
+        }
+
+        /* Retro section styling */
+        section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 0.1em;
+            color: var(--mets-orange);
+            text-shadow: 0 0 10px rgba(255, 89, 16, 0.5);
+        }
+
+        .section-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--mets-orange), transparent);
+        }
+
+        /* Frame cards like bowling score frames */
+        .frame-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .frame-card {
+            background: linear-gradient(135deg, rgba(253, 246, 227, 0.08) 0%, rgba(253, 246, 227, 0.03) 100%);
+            border: 2px solid rgba(253, 246, 227, 0.15);
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .frame-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--mets-orange), var(--neon-pink));
+        }
+
+        .frame-card:hover {
+            border-color: var(--mets-orange);
+            transform: translateX(8px);
+            box-shadow: -8px 0 30px rgba(255, 89, 16, 0.2);
+        }
+
+        .frame-number {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: rgba(255, 89, 16, 0.15);
+            line-height: 1;
+        }
+
+        .company {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--cream);
+            margin-bottom: 4px;
+        }
+
+        .role {
+            color: var(--neon-yellow);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .dates {
+            font-size: 0.875rem;
+            color: var(--mets-orange);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dates::before {
+            content: '◆';
+            font-size: 0.5rem;
+        }
+
+        .description {
+            color: rgba(253, 246, 227, 0.7);
+            font-size: 0.9375rem;
+        }
+
+        /* Skills as bowling balls */
+        .skills-lane {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-ball {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--mets-orange) 0%, #cc4400 100%);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--cream);
+            box-shadow:
+                inset -4px -4px 8px rgba(0,0,0,0.3),
+                inset 4px 4px 8px rgba(255,255,255,0.1),
+                0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .skill-ball:nth-child(even) {
+            background: linear-gradient(135deg, var(--mets-blue) 0%, #001a44 100%);
+            border: 2px solid rgba(253, 246, 227, 0.2);
+        }
+
+        .skill-ball:hover {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow:
+                inset -4px -4px 8px rgba(0,0,0,0.3),
+                inset 4px 4px 8px rgba(255,255,255,0.1),
+                0 8px 24px rgba(255, 89, 16, 0.4);
+        }
+
+        /* Contact as shoe rental counter */
+        .contact-counter {
+            background: linear-gradient(180deg, #1a1a1a 0%, #111 100%);
+            border: 3px solid var(--lane-wood);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .counter-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 10px var(--neon-yellow);
+            margin-bottom: 24px;
+            letter-spacing: 0.1em;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: transparent;
+            border: 2px solid var(--mets-orange);
+            border-radius: 8px;
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .contact-btn:hover {
+            background: var(--mets-orange);
+            box-shadow: 0 0 20px rgba(255, 89, 16, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .contact-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Fun facts ticker */
+        .ticker {
+            background: var(--mets-orange);
+            padding: 12px 0;
+            margin: 40px -24px;
+            overflow: hidden;
+        }
+
+        .ticker-content {
+            display: flex;
+            animation: ticker 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-item {
+            padding: 0 48px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--mets-blue);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: rgba(253, 246, 227, 0.5);
+            font-size: 0.875rem;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--mets-orange);
+            margin-bottom: 8px;
+        }
+
+        /* Style label */
+        .style-label {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: var(--mets-orange);
+            color: var(--cream);
+            padding: 12px 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            border-radius: 4px;
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(255, 89, 16, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="lane-bg"></div>
+    <div class="style-label">Option 6: Retro Bowling</div>
+
+    <div class="container">
+        <header>
+            <div class="neon-border"></div>
+            <div class="pins-decoration">
+                <div class="pin"></div>
+                <div class="pin"></div>
+                <div class="pin"></div>
+            </div>
+            <h1>Matthew Salem</h1>
+            <p class="tagline">Senior Software Engineer • Rolling Strikes in Code</p>
+            <div class="score-display">
+                <span class="score-digit">8</span>
+                <span class="score-digit">+</span>
+                <span class="score-digit">Y</span>
+                <span class="score-digit">R</span>
+                <span class="score-digit">S</span>
+            </div>
+            <p class="score-label">Years of Experience</p>
+        </header>
+
+        <div class="ticker">
+            <div class="ticker-content">
+                <span class="ticker-item">◆ LET'S GO METS ◆</span>
+                <span class="ticker-item">◆ 300 GAME ENERGY ◆</span>
+                <span class="ticker-item">◆ SHIPPING CODE SINCE '16 ◆</span>
+                <span class="ticker-item">◆ OPEN LANES AVAILABLE ◆</span>
+                <span class="ticker-item">◆ LET'S GO METS ◆</span>
+                <span class="ticker-item">◆ 300 GAME ENERGY ◆</span>
+                <span class="ticker-item">◆ SHIPPING CODE SINCE '16 ◆</span>
+                <span class="ticker-item">◆ OPEN LANES AVAILABLE ◆</span>
+            </div>
+        </div>
+
+        <section>
+            <div class="section-header">
+                <h2>Experience</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="frame-grid">
+                <div class="frame-card">
+                    <span class="frame-number">01</span>
+                    <div class="company">Acme Technologies</div>
+                    <div class="role">Senior Software Engineer</div>
+                    <div class="dates">2021 — Present</div>
+                    <p class="description">Led development of microservices architecture serving 2M+ daily users. Reduced system latency by 40% through strategic caching and query optimization.</p>
+                </div>
+
+                <div class="frame-card">
+                    <span class="frame-number">02</span>
+                    <div class="company">StartupCo</div>
+                    <div class="role">Full Stack Developer</div>
+                    <div class="dates">2018 — 2021</div>
+                    <p class="description">Built real-time collaboration features from ground up. Implemented WebSocket infrastructure handling 50K concurrent connections.</p>
+                </div>
+
+                <div class="frame-card">
+                    <span class="frame-number">03</span>
+                    <div class="company">Digital Agency</div>
+                    <div class="role">Frontend Developer</div>
+                    <div class="dates">2016 — 2018</div>
+                    <p class="description">Developed responsive web applications for Fortune 500 clients. Championed accessibility standards achieving WCAG 2.1 AA compliance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Skills</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-lane">
+                <span class="skill-ball">TypeScript</span>
+                <span class="skill-ball">React</span>
+                <span class="skill-ball">Node.js</span>
+                <span class="skill-ball">PostgreSQL</span>
+                <span class="skill-ball">AWS</span>
+                <span class="skill-ball">Docker</span>
+                <span class="skill-ball">GraphQL</span>
+                <span class="skill-ball">Python</span>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Education</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="frame-grid">
+                <div class="frame-card">
+                    <span class="frame-number">◆</span>
+                    <div class="company">University of Technology</div>
+                    <div class="role">B.S. Computer Science</div>
+                    <div class="dates">2012 — 2016</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="contact-counter">
+                <div class="counter-title">◆ Shoe Rental Counter ◆ Let's Connect!</div>
+                <div class="contact-links">
+                    <a href="mailto:matthew@example.com" class="contact-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Email
+                    </a>
+                    <a href="https://github.com/matthewsalem" class="contact-btn">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/matthewsalem" class="contact-btn">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-logo">SALEM LANES</div>
+            <p>© 2024 Matthew Salem • Always aiming for the pocket</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matthew Salem — Voice of the Customer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #1a1a1a;
+            --paper: #FAF9F6;
+            --accent: #8B4513;
+            --muted: #6B6B6B;
+            --rule: #E8E4DE;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            font-weight: 300;
+            font-size: 17px;
+        }
+
+        /* Newspaper-style texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+            position: relative;
+        }
+
+        /* Masthead */
+        header {
+            text-align: center;
+            margin-bottom: 64px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid var(--ink);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--ink);
+        }
+
+        .headshot {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 32px;
+            filter: grayscale(20%);
+            border: 3px solid var(--ink);
+        }
+
+        .dateline {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .byline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--muted);
+        }
+
+        /* Drop cap intro */
+        .lede {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 48px;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .lede::first-letter {
+            font-family: 'Playfair Display', serif;
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent);
+        }
+
+        /* Section styling */
+        section {
+            margin-bottom: 48px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--rule);
+            color: var(--accent);
+        }
+
+        /* Experience as newspaper columns */
+        .experience-item {
+            margin-bottom: 36px;
+            padding-bottom: 36px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .company {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 1.25rem;
+        }
+
+        .dates {
+            font-size: 0.8125rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .role {
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-size: 0.9375rem;
+        }
+
+        .description {
+            color: #444;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .description ul {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .description li {
+            padding-left: 1.5em;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .description li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Skills as inline list */
+        .skills-list {
+            column-count: 2;
+            column-gap: 40px;
+            list-style: none;
+        }
+
+        .skills-list li {
+            padding: 8px 0;
+            border-bottom: 1px dotted var(--rule);
+            font-size: 0.9375rem;
+            break-inside: avoid;
+        }
+
+        /* Contact as footer */
+        .contact-section {
+            text-align: center;
+            padding-top: 48px;
+            border-top: 1px solid var(--ink);
+            position: relative;
+            margin-top: 64px;
+        }
+
+        .contact-section::before {
+            content: '§';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--paper);
+            padding: 0 16px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--accent);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .contact-links a {
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent);
+        }
+
+        .contact-links svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 64px;
+            font-size: 0.8125rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        /* Print-inspired decorative elements */
+        .ornament {
+            text-align: center;
+            margin: 48px 0;
+            color: var(--accent);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5em;
+        }
+
+        /* Education styling */
+        .education-item {
+            margin-bottom: 16px;
+        }
+
+        .education-item .company {
+            font-size: 1.0625rem;
+        }
+
+        .education-item .role {
+            font-weight: 400;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        /* Style label */
+        .style-label {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: var(--ink);
+            color: var(--paper);
+            padding: 10px 18px;
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        @media (max-width: 600px) {
+            .skills-list {
+                column-count: 1;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="style-label">Option 1: Minimal Editorial</div>
+
+    <div class="container">
+        <header>
+            <img src="/Users/matthewsalem/Downloads/headshot.jpg" alt="Matthew Salem" class="headshot" onerror="this.style.display='none'">
+            <p class="dateline">New York City</p>
+            <h1>Matthew Salem</h1>
+            <p class="byline">Senior Program Manager, Voice of the Customer</p>
+        </header>
+
+        <p class="lede">Fifteen years translating customer signals into product decisions. Currently leading Eventbrite's Voice of the Customer program, building the infrastructure that connects customer insights to Product, Engineering, and Go-to-Market teams. Previously built GitHub's first global VoC program from scratch—reducing tooling costs by 38% and driving 11% CSAT improvement through scalable feedback systems.</p>
+
+        <div class="ornament">❧ ❧ ❧</div>
+
+        <section>
+            <h2>Experience</h2>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="company">Eventbrite</span>
+                    <span class="dates">Sept. 2025 — Present</span>
+                </div>
+                <p class="role">Lead Program Manager, Voice of the Customer</p>
+                <div class="description">
+                    <p>Establishing Eventbrite's centralized VoC strategy, building systems for gathering, analyzing, and acting on customer feedback across the organization.</p>
+                    <ul>
+                        <li>Designed end-to-end VoC operating model including feedback intake, taxonomy, analysis workflows, and executive reporting</li>
+                        <li>Own NPS program end-to-end, accountable for NPS OKR</li>
+                        <li>Conduct user research interviews, synthesizing qualitative insights into actionable product recommendations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="company">GitHub</span>
+                    <span class="dates">Mar. 2020 — Jul. 2025</span>
+                </div>
+                <p class="role">Senior Program Manager, Voice of the Customer</p>
+                <div class="description">
+                    <p>Launched and scaled GitHub's first global VoC program, embedding structured feedback systems across Product, Engineering, Support, and Revenue.</p>
+                    <ul>
+                        <li>Led Medallia implementation, integrating CSAT, NPS, and product survey data with text analytics</li>
+                        <li>Built internal insights engine using Python and LLMs, reducing costs by 38%</li>
+                        <li>Partnered cross-functionally to increase Support CSAT by 11%</li>
+                        <li>Facilitated Enterprise Customer Advisory Board with strategic customers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="company">SeatGeek</span>
+                    <span class="dates">Nov. 2018 — Jan. 2020</span>
+                </div>
+                <p class="role">Product Manager, Payments & Third-Party Integrations</p>
+                <div class="description">
+                    <p>Drove end-to-end product development for B2B payments platform and third-party integration ecosystem.</p>
+                    <ul>
+                        <li>Unified payment flows, reducing future integration time by up to 50%</li>
+                        <li>Introduced Agile practices improving sprint planning and delivery predictability</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="company">LinkedIn</span>
+                    <span class="dates">Sept. 2014 — May 2018</span>
+                </div>
+                <p class="role">Technical Services Manager, Commerce & Premium</p>
+                <div class="description">
+                    <p>Connected customer data to product development and engineering to drive technical quality improvements.</p>
+                    <ul>
+                        <li>Managed lifecycle of 1,000+ bugs, reducing bug introduction rates by 22%</li>
+                        <li>Delivered prioritized customer insights using sentiment, volume, and revenue risk analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Capabilities</h2>
+            <ul class="skills-list">
+                <li>Voice of Customer Programs</li>
+                <li>NPS, CSAT, CES Metrics</li>
+                <li>User Research</li>
+                <li>Product Operations</li>
+                <li>Cross-Functional Alignment</li>
+                <li>Executive Communication</li>
+                <li>Text & Speech Analytics</li>
+                <li>Python & SQL</li>
+                <li>Tableau, Power BI, Looker</li>
+                <li>Medallia & Qualtrics</li>
+                <li>Zendesk & Jira</li>
+                <li>Agile Practices</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="education-item">
+                <span class="company">William Paterson University</span>
+                <p class="role">Communication</p>
+            </div>
+            <div class="education-item">
+                <span class="company">Lincoln Technical Institute</span>
+                <p class="role">Networking, Security & Technical Support</p>
+            </div>
+        </section>
+
+        <div class="contact-section">
+            <ul class="contact-links">
+                <li>
+                    <a href="mailto:matthew.i.salem@gmail.com">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        matthew.i.salem@gmail.com
+                    </a>
+                </li>
+                <li>
+                    <a href="https://linkedin.com/in/matthewisalem">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>© 2025 Matthew Salem</p>
+        </footer>
+    </div>
+</body>
+</html>

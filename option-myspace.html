@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySpace.com | Matthew Salem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap" rel="stylesheet">
+    <style>
+        /* MySpace Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Trebuchet MS', Verdana, Arial, sans-serif;
+            font-size: 11px;
+            background: #000 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23ffffff20"/><circle cx="50" cy="30" r="0.5" fill="%23ffffff30"/><circle cx="80" cy="60" r="1" fill="%23ffffff15"/><circle cx="30" cy="80" r="0.5" fill="%23ffffff25"/><circle cx="70" cy="90" r="1" fill="%23ffffff20"/><circle cx="90" cy="20" r="0.5" fill="%23ffffff30"/><circle cx="20" cy="50" r="1" fill="%23ffffff15"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        a {
+            color: #66ccff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #ff66cc;
+        }
+
+        /* Glitter animation */
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            17% { color: #ff8800; }
+            33% { color: #ffff00; }
+            50% { color: #00ff00; }
+            67% { color: #0088ff; }
+            83% { color: #ff00ff; }
+            100% { color: #ff0000; }
+        }
+
+        /* MySpace Header */
+        .myspace-header {
+            background: linear-gradient(180deg, #003366 0%, #003366 50%, #002244 100%);
+            padding: 8px 0;
+            border-bottom: 2px solid #ff6600;
+        }
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .myspace-logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: -1px;
+        }
+
+        .myspace-logo span {
+            color: #ff6600;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-nav a {
+            color: #fff;
+            font-size: 11px;
+            padding: 4px 8px;
+        }
+
+        .header-nav a:hover {
+            background: #ff6600;
+            text-decoration: none;
+        }
+
+        .header-search {
+            display: flex;
+            gap: 5px;
+        }
+
+        .header-search input {
+            padding: 4px 8px;
+            border: 1px solid #666;
+            background: #fff;
+            font-size: 11px;
+            width: 150px;
+        }
+
+        .header-search button {
+            background: #ff6600;
+            border: none;
+            color: #fff;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* Profile Header Bar */
+        .profile-header-bar {
+            background: linear-gradient(180deg, #336699 0%, #224466 100%);
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border: 1px solid #4488bb;
+        }
+
+        .profile-header-bar h1 {
+            font-size: 14px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .online-indicator {
+            background: #00ff00;
+            color: #000;
+            font-size: 9px;
+            padding: 2px 6px;
+            font-weight: bold;
+            animation: sparkle 1s infinite;
+        }
+
+        /* Two Column Layout */
+        .profile-layout {
+            display: flex;
+            gap: 10px;
+        }
+
+        .left-column {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .right-column {
+            flex: 1;
+        }
+
+        /* Profile Box Styling */
+        .profile-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ff66cc;
+            margin-bottom: 10px;
+        }
+
+        .profile-box-header {
+            background: linear-gradient(180deg, #ff66cc 0%, #cc3399 100%);
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .profile-box-content {
+            padding: 10px;
+        }
+
+        /* Profile Picture Section */
+        .profile-pic-section {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .profile-pic-frame {
+            display: inline-block;
+            padding: 5px;
+            background: linear-gradient(135deg, #ff66cc, #66ccff, #ff66cc, #66ccff);
+            background-size: 200% 200%;
+            animation: rainbow-border 3s linear infinite;
+            border-radius: 5px;
+        }
+
+        @keyframes rainbow-border {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border: 3px solid #000;
+        }
+
+        .profile-url {
+            margin-top: 10px;
+            font-size: 10px;
+            color: #66ccff;
+            word-break: break-all;
+        }
+
+        .mood-section {
+            margin-top: 10px;
+            font-size: 11px;
+        }
+
+        .mood-label {
+            color: #ff66cc;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: #1a1a2e;
+            border: 2px solid #66ccff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .contact-box-title {
+            color: #66ccff;
+            font-size: 11px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .contact-table {
+            width: 100%;
+        }
+
+        .contact-table td {
+            padding: 3px;
+            text-align: center;
+        }
+
+        .contact-btn {
+            display: block;
+            background: linear-gradient(180deg, #336699 0%, #224466 100%);
+            border: 1px solid #4488bb;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .contact-btn:hover {
+            background: linear-gradient(180deg, #4488bb 0%, #336699 100%);
+            text-decoration: none;
+        }
+
+        /* Interests Table */
+        .interests-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .interests-table th {
+            background: #ff66cc;
+            color: #fff;
+            text-align: left;
+            padding: 5px 8px;
+            width: 80px;
+        }
+
+        .interests-table td {
+            background: rgba(0,0,0,0.5);
+            padding: 5px 8px;
+            color: #fff;
+            border-bottom: 1px solid #333;
+        }
+
+        .interests-table a {
+            color: #66ccff;
+        }
+
+        /* Details Table */
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .details-table td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #333;
+        }
+
+        .details-table td:first-child {
+            color: #ff66cc;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        /* Right Column Sections */
+        .blurbs-section {
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #66ccff;
+            margin-bottom: 10px;
+        }
+
+        .blurbs-header {
+            background: linear-gradient(180deg, #66ccff 0%, #3399cc 100%);
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .blurbs-content {
+            padding: 15px;
+        }
+
+        .blurb-title {
+            color: #ff66cc;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 8px;
+            animation: rainbow 5s linear infinite;
+        }
+
+        .blurb-text {
+            color: #fff;
+            font-size: 11px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .blurb-text strong {
+            color: #ffff00;
+        }
+
+        .blurb-text em {
+            color: #ff66cc;
+            font-style: normal;
+        }
+
+        /* Experience Section styled as Blog */
+        .blog-section {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #ff6600;
+            margin-bottom: 10px;
+        }
+
+        .blog-header {
+            background: linear-gradient(180deg, #ff6600 0%, #cc5500 100%);
+            color: #fff;
+            padding: 8px 12px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blog-entry {
+            padding: 15px;
+            border-bottom: 1px dashed #444;
+        }
+
+        .blog-entry:last-child {
+            border-bottom: none;
+        }
+
+        .blog-entry-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #66ccff;
+            margin-bottom: 5px;
+        }
+
+        .blog-entry-meta {
+            font-size: 9px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .blog-entry-role {
+            display: inline-block;
+            background: #ff66cc;
+            color: #fff;
+            padding: 2px 8px;
+            font-size: 10px;
+            margin-bottom: 8px;
+        }
+
+        .blog-entry-content {
+            color: #ccc;
+            font-size: 11px;
+        }
+
+        .blog-entry-content ul {
+            margin-left: 15px;
+            margin-top: 8px;
+        }
+
+        .blog-entry-content li {
+            margin-bottom: 4px;
+            color: #aaa;
+        }
+
+        .blog-entry-content li::marker {
+            color: #ff66cc;
+        }
+
+        /* Top 8 Friends (Skills) */
+        .friends-section {
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff66cc;
+            margin-bottom: 10px;
+        }
+
+        .friends-header {
+            background: linear-gradient(180deg, #ff66cc 0%, #cc3399 100%);
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .friends-count {
+            font-weight: normal;
+            font-size: 10px;
+        }
+
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 15px;
+        }
+
+        .friend-item {
+            text-align: center;
+        }
+
+        .friend-pic {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #336699, #ff66cc);
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            border: 2px solid #fff;
+        }
+
+        .friend-name {
+            font-size: 9px;
+            color: #66ccff;
+            word-break: break-word;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #66ccff;
+            margin-bottom: 10px;
+        }
+
+        .comments-header {
+            background: linear-gradient(180deg, #66ccff 0%, #3399cc 100%);
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .comment-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            gap: 10px;
+        }
+
+        .comment-pic {
+            width: 50px;
+            height: 50px;
+            background: #333;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            border: 1px solid #666;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-from {
+            color: #66ccff;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .comment-date {
+            color: #666;
+            font-size: 9px;
+        }
+
+        .comment-text {
+            color: #fff;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* Music Player */
+        .music-player {
+            background: #1a1a2e;
+            border: 2px solid #ff6600;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .player-title {
+            color: #ff6600;
+            font-size: 10px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .player-track {
+            color: #fff;
+            font-size: 11px;
+            overflow: hidden;
+        }
+
+        .player-track-scroll {
+            animation: marquee 10s linear infinite;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .player-controls {
+            margin-top: 8px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .player-btn {
+            background: #333;
+            border: 1px solid #666;
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        /* Profile Views Counter */
+        .profile-views {
+            text-align: center;
+            padding: 10px;
+            font-size: 10px;
+            color: #888;
+        }
+
+        .profile-views .count {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            padding: 2px 6px;
+            border: 1px inset #333;
+        }
+
+        /* Marquee */
+        .marquee-container {
+            background: #000;
+            border: 1px solid #ff66cc;
+            padding: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .marquee-text {
+            color: #ff66cc;
+            font-size: 11px;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+            display: inline-block;
+        }
+
+        /* Footer */
+        .myspace-footer {
+            background: #003366;
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+            border-top: 2px solid #ff6600;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 10px;
+        }
+
+        .footer-copyright {
+            color: #666;
+            font-size: 9px;
+        }
+
+        /* Sparkle decoration */
+        .sparkle {
+            color: #ffff00;
+            animation: sparkle 0.5s infinite;
+        }
+
+        /* Custom scrolling text for bio */
+        .bio-highlight {
+            background: linear-gradient(90deg, #ff66cc, #66ccff, #ff66cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-text 3s linear infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes rainbow-text {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Link colors for different sections */
+        .pink-link { color: #ff66cc; }
+        .blue-link { color: #66ccff; }
+        .orange-link { color: #ff6600; }
+        .green-link { color: #00ff00; }
+
+        @media (max-width: 800px) {
+            .profile-layout {
+                flex-direction: column;
+            }
+            .left-column {
+                width: 100%;
+            }
+            .friends-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MySpace Header -->
+    <div class="myspace-header">
+        <div class="header-inner">
+            <div class="myspace-logo">My<span>Space</span>.com</div>
+            <div class="header-nav">
+                <a href="#">Home</a>
+                <a href="#">Browse</a>
+                <a href="#">Search</a>
+                <a href="#">Invite</a>
+                <a href="#">Film</a>
+                <a href="#">Mail</a>
+                <a href="#">Blog</a>
+                <a href="#">Favorites</a>
+                <a href="#">Forum</a>
+                <a href="#">Groups</a>
+                <a href="#">Events</a>
+                <a href="#">MySpace TV</a>
+                <a href="#">Music</a>
+                <a href="#">Comedy</a>
+                <a href="#">Classifieds</a>
+            </div>
+            <div class="header-search">
+                <input type="text" placeholder="Search MySpace">
+                <button>Search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+
+        <!-- Profile Header Bar -->
+        <div class="profile-header-bar">
+            <h1>
+                <span class="sparkle">★</span>
+                Matthew Salem
+                <span class="sparkle">★</span>
+                <span class="online-indicator">ONLINE NOW!</span>
+            </h1>
+        </div>
+
+        <!-- Scrolling Marquee -->
+        <div class="marquee-container">
+            <span class="marquee-text">
+                ★彡 wElCoMe 2 mY pAgE!!! ★彡 15+ yEaRs BuIlDiNg VoIcE oF tHe CuStOmEr PrOgRaMs ★彡 cUrReNtLy @ EvEnTbRiTe ★彡 fOrMeRlY @ gItHuB, sEaTgEeK, LiNkEdIn ★彡 tHx 4 tHe AdD!!! ★彡 nYc BaSeD ★彡 LeTs Go MeTs!!! ⚾ ★彡
+            </span>
+        </div>
+
+        <div class="profile-layout">
+
+            <!-- Left Column -->
+            <div class="left-column">
+
+                <!-- Profile Picture -->
+                <div class="profile-box">
+                    <div class="profile-box-header">Matthew's Profile</div>
+                    <div class="profile-pic-section">
+                        <div class="profile-pic-frame">
+                            <img src="/Users/matthewsalem/Downloads/headshot.jpg" alt="Matthew Salem" class="profile-pic" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23336699%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22115%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2260%22 font-family=%22Arial%22>MS</text></svg>'">
+                        </div>
+                        <div class="profile-url">"The Customer Whisperer"</div>
+                        <div class="mood-section">
+                            <span class="mood-label">Mood:</span> Ready to ship insights 🚀
+                        </div>
+                        <div class="profile-views">
+                            Profile Views: <span class="count">15,847</span>
+                        </div>
+                        <div style="font-size: 9px; color: #666; margin-top: 5px;">
+                            Last Login: Today
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Box -->
+                <div class="contact-box">
+                    <div class="contact-box-title">Contacting Matthew</div>
+                    <table class="contact-table">
+                        <tr>
+                            <td><a href="mailto:matthew.i.salem@gmail.com" class="contact-btn">Send Message</a></td>
+                            <td><a href="https://linkedin.com/in/matthewisalem" class="contact-btn">Add to Friends</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" class="contact-btn">Add to Favorites</a></td>
+                            <td><a href="#" class="contact-btn">Block User</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" class="contact-btn">Add to Group</a></td>
+                            <td><a href="#" class="contact-btn">Rank User</a></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Music Player -->
+                <div class="music-player">
+                    <div class="player-title">♫ Matthew's Music ♫</div>
+                    <div class="player-track">
+                        <span class="player-track-scroll">
+                            Now Playing: Blink-182 - All The Small Things • Third Eye Blind - Semi-Charmed Life • Matchbox Twenty - Push •
+                        </span>
+                    </div>
+                    <div class="player-controls">
+                        <button class="player-btn">◄◄</button>
+                        <button class="player-btn">▶</button>
+                        <button class="player-btn">►►</button>
+                        <button class="player-btn">■</button>
+                    </div>
+                </div>
+
+                <!-- Interests -->
+                <div class="profile-box">
+                    <div class="profile-box-header">Matthew's Interests</div>
+                    <div class="profile-box-content" style="padding: 0;">
+                        <table class="interests-table">
+                            <tr>
+                                <th>General</th>
+                                <td>Voice of the Customer, NPS, CSAT, User Research, Building Feedback Systems, Cross-Functional Alignment, Product Ops, Bowling 🎳, NY Mets ⚾</td>
+                            </tr>
+                            <tr>
+                                <th>Music</th>
+                                <td><a href="#">Blink-182</a>, <a href="#">Third Eye Blind</a>, <a href="#">Matchbox Twenty</a>, <a href="#">Foo Fighters</a>, <a href="#">Green Day</a>, <a href="#">Smashing Pumpkins</a>, <a href="#">Oasis</a></td>
+                            </tr>
+                            <tr>
+                                <th>Movies</th>
+                                <td><a href="#">When Harry Met Sally</a>, <a href="#">The Princess Bride</a>, <a href="#">Say Anything</a>, <a href="#">Sixteen Candles</a>, <a href="#">Tommy Boy</a>, <a href="#">Happy Gilmore</a>, <a href="#">Superbad</a></td>
+                            </tr>
+                            <tr>
+                                <th>Television</th>
+                                <td>Mets games, whatever's funny</td>
+                            </tr>
+                            <tr>
+                                <th>Books</th>
+                                <td>Product documentation, Python docs, anything about customer experience</td>
+                            </tr>
+                            <tr>
+                                <th>Heroes</th>
+                                <td>Tom (MySpace), Anyone who actually reads NPS comments</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Details -->
+                <div class="profile-box">
+                    <div class="profile-box-header">Matthew's Details</div>
+                    <div class="profile-box-content" style="padding: 0;">
+                        <table class="details-table">
+                            <tr>
+                                <td>Status:</td>
+                                <td>Open to opportunities</td>
+                            </tr>
+                            <tr>
+                                <td>Here for:</td>
+                                <td>Networking, Career</td>
+                            </tr>
+                            <tr>
+                                <td>Hometown:</td>
+                                <td>New York City Area</td>
+                            </tr>
+                            <tr>
+                                <td>Body type:</td>
+                                <td>Full-stack PM 💪</td>
+                            </tr>
+                            <tr>
+                                <td>Zodiac:</td>
+                                <td>Customer-centric ♒</td>
+                            </tr>
+                            <tr>
+                                <td>Smoke / Drink:</td>
+                                <td>Coffee / Yes ☕</td>
+                            </tr>
+                            <tr>
+                                <td>Education:</td>
+                                <td>William Paterson University (Communication), Lincoln Technical Institute</td>
+                            </tr>
+                            <tr>
+                                <td>Occupation:</td>
+                                <td>Lead PM, Voice of the Customer @ Eventbrite</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+
+                <!-- About Me -->
+                <div class="blurbs-section">
+                    <div class="blurbs-header">Matthew's Blurbs</div>
+                    <div class="blurbs-content">
+                        <div class="blurb-title">★彡 About Me 彡★</div>
+                        <div class="blurb-text">
+                            <span class="bio-highlight">★ Senior Program Manager with 15+ years building customer experience programs ★</span>
+                            <br><br>
+                            heyyy!! <strong>thx 4 visiting my page!!</strong> 🌟
+                            <br><br>
+                            im currently @ <em>Eventbrite</em> leading the Voice of the Customer program!! building systems 4 gathering, analyzing, and acting on customer feedback across the whole org 📊
+                            <br><br>
+                            b4 that i was @ <em>GitHub</em> where i launched their FIRST global VoC program from scratch!! we reduced tooling costs by <strong>38%</strong> and improved Support CSAT by <strong>11%</strong> 🚀
+                            <br><br>
+                            i basically translate customer signals into product decisions... like a customer whisperer lol 🎧
+                            <br><br>
+                            <strong>skills:</strong> Python, SQL, Medallia, Qualtrics, Tableau, NPS/CSAT/CES, User Research, Cross-Functional Alignment, Executive Communication
+                            <br><br>
+                            <span style="color: #ff66cc;">♥</span> when im not working u can find me bowling, watching the Mets, or quoting 80s rom coms <span style="color: #ff66cc;">♥</span>
+                        </div>
+
+                        <div class="blurb-title">★彡 Who I'd Like to Meet 彡★</div>
+                        <div class="blurb-text">
+                            <strong>Recruiters & Hiring Managers</strong> at companies who understand that customer obsession drives product success!!
+                            <br><br>
+                            Looking for orgs where VoC isn't just a checkbox but a strategic advantage. If ur building something customers will love and want someone who can create the feedback infrastructure to make that happen... <em>lets talk!!</em>
+                            <br><br>
+                            also down 2 connect w/ other PM/VoC folks, product leaders, and anyone who gets excited about turning customer feedback into real product improvements 🙌
+                            <br><br>
+                            <a href="mailto:matthew.i.salem@gmail.com" class="pink-link">★ Click here 2 email me!! ★</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience (Blog Style) -->
+                <div class="blog-section">
+                    <div class="blog-header">
+                        <span>Matthew's Career Blog</span>
+                        <span style="font-size: 10px; font-weight: normal;">[View All | Subscribe]</span>
+                    </div>
+
+                    <div class="blog-entry">
+                        <div class="blog-entry-title">Eventbrite</div>
+                        <div class="blog-entry-meta">Sept 2025 - Present | New York, NY | Currently Reading</div>
+                        <div class="blog-entry-role">Lead Program Manager, Voice of the Customer</div>
+                        <div class="blog-entry-content">
+                            Establishing Eventbrite's centralized VoC strategy, building systems for gathering, analyzing, and acting on customer feedback.
+                            <ul>
+                                <li>Designed end-to-end VoC operating model including feedback intake, taxonomy, analysis workflows, and executive reporting</li>
+                                <li>Own NPS program end-to-end, accountable for NPS OKR</li>
+                                <li>Conduct user research interviews, synthesizing qualitative insights into actionable product recommendations</li>
+                                <li>Evaluated VoC tech stack including AI-based text analysis for scalable insight generation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="blog-entry">
+                        <div class="blog-entry-title">GitHub</div>
+                        <div class="blog-entry-meta">Mar 2020 - Jul 2025 | New York, NY | 5,293 views</div>
+                        <div class="blog-entry-role">Senior Program Manager, Voice of the Customer</div>
+                        <div class="blog-entry-content">
+                            Launched and scaled GitHub's first global VoC program, embedding structured feedback systems across Product, Engineering, Support, and Revenue.
+                            <ul>
+                                <li>Built internal insights engine using <strong>Python and LLMs</strong>, reducing costs by <strong>38%</strong></li>
+                                <li>Led Medallia implementation integrating CSAT, NPS, and product survey data with text analytics</li>
+                                <li>Increased Support CSAT by <strong>11%</strong> through root cause analysis and targeted improvements</li>
+                                <li>Implemented automated Zendesk → GitHub integration improving incident tracking by 20%</li>
+                                <li>Facilitated Enterprise Customer Advisory Board with strategic customers</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="blog-entry">
+                        <div class="blog-entry-title">SeatGeek</div>
+                        <div class="blog-entry-meta">Nov 2018 - Jan 2020 | New York, NY | 2,847 views</div>
+                        <div class="blog-entry-role">Product Manager, Payments & Third-Party Integrations</div>
+                        <div class="blog-entry-content">
+                            End-to-end product development for B2B payments platform and third-party integration ecosystem.
+                            <ul>
+                                <li>Unified consumer and enterprise payment flows, reducing future integration time by <strong>50%</strong></li>
+                                <li>Introduced Agile practices for integrations team, improving sprint planning and delivery predictability</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="blog-entry">
+                        <div class="blog-entry-title">LinkedIn</div>
+                        <div class="blog-entry-meta">Sept 2014 - May 2018 | Sunnyvale, CA | 4,182 views</div>
+                        <div class="blog-entry-role">Technical Services Manager, Commerce & Premium</div>
+                        <div class="blog-entry-content">
+                            Connected customer data to product development and engineering to drive technical quality improvements.
+                            <ul>
+                                <li>Managed lifecycle of 1,000+ bugs, reducing bug introduction rates by <strong>22%</strong> while maintaining 91% SLA compliance</li>
+                                <li>Built Tableau dashboards and executive summaries for product health reporting</li>
+                                <li>Delivered prioritized customer insights using sentiment, volume, and revenue risk analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top 8 Friends (Skills) -->
+                <div class="friends-section">
+                    <div class="friends-header">
+                        Matthew's Top 8 <span class="friends-count">(Skills I'd Take to the Dance)</span>
+                    </div>
+                    <div class="friends-grid">
+                        <div class="friend-item">
+                            <div class="friend-pic" style="background: linear-gradient(135deg, #ff6600, #ff9900);">📊</div>
+                            <div class="friend-name">NPS/CSAT/CES</div>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-pic" style="background: linear-gradient(135deg, #3572A5, #6699cc);">🐍</div>
+                            <div class="friend-name">Python</div>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-pic" style="background: linear-gradient(135deg, #00B2A9, #00d4c8);">💎</div>
+                            <div class="friend-name">Medallia</div>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-pic" style="background: linear-gradient(135deg, #E97627, #ff9944);">📈</div>
+                            <div class="friend-name">Tableau</div>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-pic" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe);">🔬</div>
+                            <div class="friend-name">User Research</div>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-pic" style="background: linear-gradient(135deg, #e38c00, #ffbb33);">🗄️</div>
+                            <div class="friend-name">SQL</div>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-pic" style="background: linear-gradient(135deg, #00b894, #55efc4);">🤝</div>
+                            <div class="friend-name">Cross-Functional</div>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-pic" style="background: linear-gradient(135deg, #fd79a8, #ff66cc);">🎯</div>
+                            <div class="friend-name">Product Ops</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <div class="comments-header">
+                        <span>Matthew's Testimonials</span>
+                        <span style="font-size: 10px;">(4) | <a href="#" style="color: #fff;">Add Comment</a></span>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-pic" style="background: linear-gradient(135deg, #ff6600, #ff9900);">EB</div>
+                        <div class="comment-content">
+                            <div class="comment-from">Eventbrite Team</div>
+                            <div class="comment-date">Today at 2:15 PM</div>
+                            <div class="comment-text">So glad to have you building out our VoC program!! The executive reporting cadence is *chef's kiss* 🙌</div>
+                        </div>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-pic" style="background: linear-gradient(135deg, #24292e, #4a5568);">GH</div>
+                        <div class="comment-content">
+                            <div class="comment-from">GitHub Alumni</div>
+                            <div class="comment-date">Jul 15, 2025</div>
+                            <div class="comment-text">thx 4 everything Matt!! that Python + LLM insights engine you built is STILL crushing it. miss working w/ you! 💜</div>
+                        </div>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-pic" style="background: linear-gradient(135deg, #0077b5, #00a0dc);">LI</div>
+                        <div class="comment-content">
+                            <div class="comment-from">LinkedIn Fam</div>
+                            <div class="comment-date">May 2018</div>
+                            <div class="comment-text">Best Technical Services Manager we ever had!! Those Tableau dashboards are legendary. Good luck in NYC!!</div>
+                        </div>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-pic" style="background: linear-gradient(135deg, #ff66cc, #ff99dd);">TOM</div>
+                        <div class="comment-content">
+                            <div class="comment-from">Tom</div>
+                            <div class="comment-date">2006</div>
+                            <div class="comment-text">thx 4 the add!!! ✌️</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="myspace-footer">
+        <div class="footer-links">
+            <a href="#">About</a> |
+            <a href="#">FAQ</a> |
+            <a href="#">Terms</a> |
+            <a href="#">Privacy</a> |
+            <a href="#">Safety Tips</a> |
+            <a href="#">Contact MySpace</a> |
+            <a href="#">Promote</a> |
+            <a href="#">Advertise</a> |
+            <a href="#">MySpace International</a>
+        </div>
+        <div class="footer-copyright">
+            ©2003-2025 MySpace.com. All Rights Reserved. | <a href="mailto:matthew.i.salem@gmail.com" style="color: #ff66cc;">Contact Matthew</a> | <a href="https://linkedin.com/in/matthewisalem" style="color: #66ccff;">LinkedIn</a>
+        </div>
+    </div>
+
+</body>
+</html>

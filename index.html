@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matthew Salem | MyResume</title>
+    <style>
+        :root {
+            --light-gray: #f2f0f0;
+            --gray: #e3e3e3;
+            --dark-gray: #919191;
+            --darker-gray: #545454;
+            --logo-blue: #1D4ED8;
+            --darker-blue: #1E40AF;
+            --lighter-blue: #60A5FA;
+            --even-lighter-blue: #BFDBFE;
+            --lightest-blue: #DBEAFE;
+            --red: #FF0000;
+            --dark-orange: #ED0707;
+            --light-orange: #f9c56c;
+            --even-lighter-orange: #fcdbb8;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { line-height: 1.225; }
+
+        html, body { margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--gray);
+            font-family: verdana, arial, sans-serif, helvetica;
+            font-size: 80%;
+        }
+
+        a {
+            color: var(--darker-blue);
+            text-decoration: none;
+        }
+
+        a:hover, a:active {
+            color: #cc0000;
+            text-decoration: underline;
+        }
+
+        p { font-size: max(0.875em, 12px); }
+
+        .container {
+            width: 960px;
+            max-width: 100%;
+            margin: 0 auto 10px;
+        }
+
+        /* Navigation */
+        nav {
+            color: white;
+            font-size: max(72%, 12px);
+        }
+
+        nav .top {
+            background: var(--logo-blue);
+            padding: 15px 10px 14px;
+            display: flex;
+            position: relative;
+        }
+
+        nav .top a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        nav .top a:hover {
+            text-decoration: underline;
+        }
+
+        nav .top div {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        nav .top .left a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        nav .top .left .logo {
+            display: flex;
+            align-items: center;
+            height: 42px;
+            overflow: hidden;
+        }
+
+        nav .top .left .logo-img {
+            height: 160px;
+            width: auto;
+            margin-top: 25px;
+            margin-left: -24px;
+        }
+
+        nav .top .center {
+            text-align: center;
+            flex: 1;
+        }
+
+        nav .top .center form {
+            margin-top: -2px;
+        }
+
+        nav .top .center input {
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            font-size: 11px;
+            width: 180px;
+        }
+
+        nav .top .center button {
+            padding: 4px 12px;
+            background: #f0f0f0;
+            border: 1px solid #999;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        nav .top .right {
+            text-align: right;
+        }
+
+        nav .links {
+            background-color: var(--lighter-blue);
+            padding: 3.5px 16px;
+            margin: 0;
+            list-style: none;
+        }
+
+        nav .links li {
+            display: inline-block;
+            min-height: 1.4em;
+        }
+
+        nav .links li:not(:last-child)::after {
+            content: " | ";
+            color: black;
+        }
+
+        nav .links a {
+            text-decoration: none;
+            color: white;
+            text-shadow: 0 0 7px #095dc3;
+            font-size: max(0.98em, 12px);
+        }
+
+        nav .links a:hover {
+            text-decoration: underline;
+            color: #040c5c;
+        }
+
+        /* Main */
+        main {
+            background: white;
+            color: black;
+            padding: 6px 0;
+        }
+
+        main .left, main .right {
+            padding: 10px;
+        }
+
+        /* Profile */
+        .profile h1 {
+            font-size: 1.5em;
+            margin: 0 0 10px;
+        }
+
+        .profile h1 .verified-icon {
+            width: 18px;
+            height: 18px;
+            margin-left: 2px;
+            vertical-align: middle;
+            position: relative;
+            top: -2px;
+        }
+
+        .general-about .profile-pic {
+            display: block;
+            float: left;
+            margin: 0 15px 8px 0;
+        }
+
+        .general-about .profile-pic img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .general-about .details {
+            display: block;
+        }
+
+        .general-about .tagline {
+            font-style: italic;
+            color: var(--darker-gray);
+            margin: 5px 0;
+        }
+
+        .general-about .status {
+            color: var(--dark-orange);
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .general-about .location {
+            color: var(--darker-gray);
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        .profile .mood {
+            width: 100%;
+            display: inline-block;
+        }
+
+        .profile .mood p {
+            margin: 0 0 8px;
+        }
+
+        .view-my a {
+            margin-right: 0;
+        }
+
+        /* Contact Section */
+        .profile .contact,
+        .profile .table-section {
+            width: 100%;
+            border: 2px solid var(--lighter-blue);
+            margin: 10px 0;
+        }
+
+        .profile .contact .heading,
+        .profile .table-section .heading {
+            background: var(--lighter-blue);
+            color: white;
+            padding: 2px 7px;
+        }
+
+        .profile .contact .heading h4,
+        .profile .table-section .heading h4 {
+            margin: 0;
+            display: inline-block;
+        }
+
+        .profile .contact .f-row {
+            margin: 7px;
+            font-weight: bold;
+            font-size: 0.875em;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            padding: 7px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--darker-blue);
+        }
+
+        .contact-item:hover {
+            color: #cc0000;
+        }
+
+        .contact-item img,
+        .contact-item svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .profile .url-info {
+            width: 100%;
+            border: 2px solid var(--lighter-blue);
+            padding: 4px 7px;
+            margin: 10px 0;
+        }
+
+        .profile .url-info p {
+            font-size: 100%;
+            margin: 0;
+            word-break: break-all;
+        }
+
+        /* Details Table */
+        table.details-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .details-table td:first-child {
+            background: var(--even-lighter-blue);
+            color: var(--logo-blue);
+            font-weight: bold;
+            width: 33%;
+        }
+
+        .details-table td {
+            background: var(--lightest-blue);
+            vertical-align: top;
+            padding: 6px 8px;
+            border-bottom: 1px solid white;
+        }
+
+        .details-table td p {
+            margin: 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        /* Links Table */
+        .links-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .links-table td {
+            padding: 4px 8px;
+            vertical-align: middle;
+        }
+
+        .links-table td:first-child {
+            width: 90px;
+        }
+
+        .links-table a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .links-table img,
+        .links-table svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Blurbs Section */
+        .profile .blurbs {
+            margin: 20px 0;
+        }
+
+        .profile .blurbs .heading {
+            background: var(--light-orange);
+            color: var(--dark-orange);
+            padding: 2px 7px;
+        }
+
+        .profile .blurbs .heading h4 {
+            margin: 0;
+            display: inline-block;
+        }
+
+        .profile .blurbs .inner {
+            padding: 7px;
+        }
+
+        .profile .blurbs .section {
+            margin-bottom: 14px;
+        }
+
+        .profile .blurbs .section h4 {
+            margin: 0;
+            color: var(--dark-orange);
+        }
+
+        .profile .blurbs .section p {
+            margin: 0 0 8px;
+            font-size: inherit;
+        }
+
+        .profile .blurbs .section ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .profile .blurbs .section li {
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            border: 2px solid var(--even-lighter-blue);
+            margin-bottom: 15px;
+        }
+
+        .blog-section .heading {
+            background: var(--even-lighter-blue);
+            padding: 5px 7px;
+        }
+
+        .blog-section .heading h4 {
+            margin: 0;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+
+        .blog-section .heading a.more {
+            float: right;
+            margin-top: 1px;
+            font-size: 80%;
+        }
+
+        .blog-section .inner {
+            padding: 6px 15px 10px;
+        }
+
+        .blog-entry {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--gray);
+        }
+
+        .blog-entry:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .blog-entry h5 {
+            margin: 0 0 4px;
+            color: var(--darker-blue);
+        }
+
+        .blog-entry .meta {
+            font-size: 10px;
+            color: var(--dark-gray);
+            margin-bottom: 6px;
+        }
+
+        /* Friends Section */
+        .profile .friends {
+            border: 2px solid var(--light-orange);
+            margin: 20px 0;
+        }
+
+        .profile .friends .heading {
+            background: var(--light-orange);
+            color: var(--dark-orange);
+            padding: 2px 7px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile .friends .heading h4 {
+            margin: 0;
+            display: inline-block;
+        }
+
+        .profile .friends .heading a.more {
+            font-size: 80%;
+        }
+
+        .profile .friends .inner {
+            padding: 7px;
+        }
+
+        .profile .friends p {
+            margin: 0 0 8px;
+        }
+
+        .profile .friends .count {
+            color: #d32626;
+        }
+
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .profile .friends .person {
+            text-align: center;
+            padding: 5px;
+        }
+
+        .profile .friends .person p {
+            color: #666;
+            font-weight: bold;
+            font-size: 100%;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .profile .friends .person img {
+            max-width: 95px;
+            max-height: 95px;
+            display: block;
+            margin: 0 auto 5px;
+            border: 1px solid var(--gray);
+        }
+
+        .friend-role {
+            font-size: 9px;
+            color: var(--dark-gray);
+            font-weight: normal;
+        }
+
+        /* Comments Table */
+        table.comments-table {
+            width: 100%;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            border-collapse: collapse;
+        }
+
+        .comments-table td:first-child {
+            background: var(--light-orange);
+            text-align: center;
+            font-weight: bold;
+            width: 38%;
+            padding: 10px;
+        }
+
+        .comments-table td {
+            background: var(--even-lighter-orange);
+            vertical-align: top;
+            padding: 10px;
+        }
+
+        .comments-table td:first-child img {
+            width: 90px;
+            max-width: 100%;
+            max-height: 90px;
+        }
+
+        .comments-table p {
+            font-size: 100%;
+            margin: 5px 0;
+        }
+
+        .comments-table .date {
+            font-size: 11px;
+            color: var(--darker-gray);
+        }
+
+        .comments-table .achievement {
+            font-weight: bold;
+            color: var(--dark-orange);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            font-size: 70%;
+            margin: 10px 0;
+            padding: 10px 5px;
+            background-color: var(--gray);
+        }
+
+        footer p {
+            vertical-align: middle;
+            margin: 10px 0 5px;
+            font-size: 90%;
+        }
+
+        footer .links {
+            margin: 16px 0 5px;
+            padding: 0;
+            text-align: center;
+            list-style: none;
+        }
+
+        footer .links li {
+            display: inline-block;
+        }
+
+        footer .links li:not(:last-child)::after {
+            content: " | ";
+            color: black;
+        }
+
+        /* Two Column Layout */
+        @media (min-width: 30em) {
+            .row {
+                width: 100%;
+                display: table;
+                table-layout: fixed;
+            }
+            .col {
+                display: table-cell;
+                vertical-align: top;
+            }
+            .col.w-40 { width: 40%; }
+            .col.w-60 { width: 60%; }
+        }
+
+        @media (max-width: 30em) {
+            .friends-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="top">
+                <div class="left">
+                    <a href="#" class="logo">
+                        <img src="logo-myresume.png" alt="myresume" class="logo-img">
+                    </a>
+                </div>
+                <div class="center">
+                    <form>
+                        <span style="margin-right: 5px;">Search Resume:</span>
+                        <input type="text" placeholder="" id="resume-search">
+                        <button type="button" onclick="searchResume()">Search</button>
+                    </form>
+                </div>
+                <div class="right">
+                    <a href="mailto:mattsalemnyc@gmail.com">Contact</a> |
+                    <a href="https://linkedin.com/in/matthewisalem">LinkedIn</a> |
+                    <a href="#">Download</a>
+                </div>
+            </div>
+            <ul class="links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#achievements">Comments</a></li>
+                <li><a href="mailto:mattsalemnyc@gmail.com">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <div class="row profile">
+                <!-- Left Column -->
+                <div class="col w-40 left">
+                    <h1>Matthew Salem <img src="verified.png" alt="Verified" class="verified-icon" title="Open to Work"></h1>
+
+                    <div class="general-about">
+                        <div class="profile-pic">
+                            <img src="headshot.jpg" alt="Matthew Salem" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><rect fill=%22%23e3e3e3%22 width=%22160%22 height=%22160%22/><text x=%2280%22 y=%2290%22 text-anchor=%22middle%22 font-family=%22Verdana%22 font-size=%2250%22 fill=%22%23999%22>MS</text></svg>'">
+                        </div>
+                        <div class="details">
+                            <p class="tagline">"Translating customer signals into product decisions"</p>
+                            <p class="status">Lead Program Manager, VoC</p>
+                            <p class="location"><svg fill="currentColor" viewBox="0 0 20 20" width="12" height="12" style="vertical-align: -1px; margin-right: 4px;"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>New York, NY</p>
+                        </div>
+                    </div>
+
+                    <div class="mood">
+                        <p><strong>Mood:</strong> <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16" style="vertical-align: -3px; margin-right: 2px;"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg> Vibe coding!</p>
+                        <p class="view-my"><strong>View my:</strong> <a href="#experience">Experience</a> | <a href="#achievements">Comments</a></p>
+                    </div>
+
+                    <!-- Contact Section -->
+                    <div class="contact">
+                        <div class="heading">
+                            <h4>Contacting Matthew</h4>
+                        </div>
+                        <div class="contact-grid">
+                            <a class="contact-item" href="mailto:mattsalemnyc@gmail.com">
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                                Send Email
+                            </a>
+                            <a class="contact-item" href="https://linkedin.com/in/matthewisalem">
+                                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                                LinkedIn Profile
+                            </a>
+                            <a class="contact-item" href="https://x.com/mattsalem">
+                                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                @mattsalem
+                            </a>
+                            <a class="contact-item" href="matthew-salem-resume.pdf" download>
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+                                Download Resume
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="url-info">
+                        <p><strong>MyResume URL:</strong></p>
+                        <p>https://matthewsalem.com</p>
+                    </div>
+
+                    <!-- Skills Section -->
+                    <div class="table-section" id="skills">
+                        <div class="heading">
+                            <h4>Matthew's Skills</h4>
+                        </div>
+                        <table class="details-table">
+                            <tr>
+                                <td><p>Programs</p></td>
+                                <td><p>Scaling Feedback Programs, Product Operations, Cross-Functional Alignment, Strategic Prioritization</p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Metrics</p></td>
+                                <td><p>CSAT, NPS, CES, Text and Speech Analytics, Data Analysis</p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Product</p></td>
+                                <td><p>User Research, Product Roadmapping, Agile Development Practices, Executive Communication</p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Technical</p></td>
+                                <td><p>SQL, PostgreSQL, Python, REST APIs, Next.js, SwiftUI</p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Analytics</p></td>
+                                <td><p>Tableau, Power BI, Looker, Salesforce</p></td>
+                            </tr>
+                            <tr>
+                                <td><p>VoC Tools</p></td>
+                                <td><p>Medallia, Qualtrics, Zendesk, Jira, Linear</p></td>
+                            </tr>
+                            <tr>
+                                <td><p>AI Tools</p></td>
+                                <td><p>GitHub Copilot, Claude Code, ChatGPT, Codex</p></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Education Section -->
+                    <div class="table-section">
+                        <div class="heading">
+                            <h4>Matthew's Education</h4>
+                        </div>
+                        <table class="details-table">
+                            <tr>
+                                <td><p>University</p></td>
+                                <td><p>William Paterson University — Communication</p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Technical</p></td>
+                                <td><p>Lincoln Technical Institute — Networking, Security & Technical Support</p></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Links Section -->
+                    <div class="table-section">
+                        <div class="heading">
+                            <h4>Matthew's Links</h4>
+                        </div>
+                        <table class="links-table">
+                            <tr>
+                                <td>
+                                    <a href="https://linkedin.com/in/matthewisalem">
+                                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                                        LinkedIn
+                                    </a>
+                                </td>
+                                <td><a href="https://linkedin.com/in/matthewisalem">@matthewisalem</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="mailto:mattsalemnyc@gmail.com">
+                                        <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                                        Email
+                                    </a>
+                                </td>
+                                <td><a href="mailto:mattsalemnyc@gmail.com">mattsalemnyc@gmail.com</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://x.com/mattsalem">
+                                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                        X
+                                    </a>
+                                </td>
+                                <td><a href="https://x.com/mattsalem">@mattsalem</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col w-60 right">
+                    <!-- Career Highlights Blog Section -->
+                    <div class="blog-section">
+                        <div class="heading">
+                            <h4>Matthew's Latest Blog Entry [<a href="#">Subscribe to this Blog</a>]</h4>
+                        </div>
+                        <div class="inner">
+                            <p>tom would be proud (<a href="#">view more</a>)</p>
+                        </div>
+                    </div>
+
+                    <!-- Blurbs Section -->
+                    <div class="blurbs" id="about">
+                        <div class="heading">
+                            <h4>Matthew's Blurbs</h4>
+                        </div>
+                        <div class="inner">
+                            <div class="section">
+                                <h4>About me:</h4>
+                                <p>I've spent the last 15+ years building customer experience programs, feedback systems, and cross-functional alignment across SaaS and B2B. Currently leading Eventbrite's Voice of the Customer program, creating infrastructure that connects customer insights to Product, Engineering, and Go-to-Market teams.</p>
+                                <p>Previously built GitHub's first global VoC program from scratch, reducing tooling costs by 38% and driving 11% CSAT improvement through scalable feedback systems and data-driven prioritization. Track record of building programs from zero, influencing decision-making, and translating complex customer signals into product decisions.</p>
+                            </div>
+                            <div class="section">
+                                <h4>Who I'd like to meet:</h4>
+                                <p>Companies that believe customer insights should drive product strategy. Teams where data meets empathy, and cross-functional collaboration is valued.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Section -->
+                    <div class="blurbs" id="experience">
+                        <div class="heading">
+                            <h4>Matthew's Experience</h4>
+                        </div>
+                        <div class="inner">
+                            <div class="section">
+                                <h4>Eventbrite | Lead Program Manager, Voice of the Customer | Sept. 2025 – Present</h4>
+                                <p><em>Establishing Eventbrite's centralized Voice of the Customer strategy, building systems for gathering, analyzing, and acting on customer feedback across the organization.</em></p>
+                                <ul>
+                                    <li>Designed end-to-end VoC operating model including feedback intake, taxonomy, analysis workflows, executive reporting cadence, and response processes.</li>
+                                    <li>Own Eventbrite's NPS program end-to-end, from customer segmentation and survey design through implementation, analysis, and executive reporting. Accountable for NPS OKR.</li>
+                                    <li>Conduct user research interviews with customers completing key flows, synthesizing qualitative insights into actionable product recommendations.</li>
+                                    <li>Evaluated VoC technology stack and data pipelines, including survey platforms, analytics tooling, and AI-based text analysis, to enable scalable insight generation.</li>
+                                    <li>Established executive reporting rhythms surfacing customer risks, friction points, and commitments tied to retention.</li>
+                                </ul>
+                            </div>
+                            <div class="section">
+                                <h4>GitHub | Senior Program Manager, Voice of the Customer | Mar. 2020 – Jul. 2025</h4>
+                                <p><em>Launched and scaled GitHub's first global Voice of the Customer program, embedding structured feedback systems across Product, Engineering, Support, and Revenue to inform roadmap decisions and improve customer experience.</em></p>
+                                <ul>
+                                    <li>Led selection and implementation of Medallia (feedback platform), integrating CSAT, NPS, and product survey data with text analytics to deliver actionable insights across teams.</li>
+                                    <li>Supported enterprise product rollouts alongside Product, Engineering, Marketing, and Customer Success, defining readiness criteria, tracking release metrics, and enabling quick iteration based on early customer feedback.</li>
+                                    <li>Led feedback collection for beta programs, surfacing friction points and testing assumptions before general availability.</li>
+                                    <li>Delivered real-time customer insights through data pipelines and executive dashboards, enabling leadership to prioritize high-friction issues and track experience metrics at scale.</li>
+                                    <li>Built internal insights engine using Python and LLMs to analyze unstructured feedback from community forums and social channels, consolidating tooling and reducing costs by 38%.</li>
+                                    <li>Implemented automated Zendesk to GitHub integration to sync incidents with issues, enabling end-to-end customer communication and improving incident tracking by 20%.</li>
+                                    <li>Partnered cross-functionally to increase Support CSAT by 11% through root cause analysis and targeted process improvements.</li>
+                                    <li>Facilitated GitHub's Enterprise Customer Advisory Board, leading structured feedback sessions with strategic customers to validate product direction.</li>
+                                </ul>
+                            </div>
+                            <div class="section">
+                                <h4>SeatGeek | Product Manager, Payments & Third-Party Integrations | Nov. 2018 – Jan. 2020</h4>
+                                <p><em>Drove end-to-end product development for SeatGeek's B2B payments platform and third-party integration ecosystem supporting enterprise ticketing.</em></p>
+                                <ul>
+                                    <li>Owned and communicated the roadmap for payments and integrations, prioritizing initiatives based on business goals, partner needs, and technical feasibility.</li>
+                                    <li>Unified consumer and enterprise payment flows through cross-functional coordination, reducing future integration time by up to 50%.</li>
+                                    <li>Introduced Agile practices for integrations team, improving sprint planning, workload visibility, and delivery predictability.</li>
+                                </ul>
+                            </div>
+                            <div class="section">
+                                <h4>LinkedIn | Technical Services Manager, Commerce & Premium | Sept. 2014 – May 2018</h4>
+                                <p><em>Connected customer data to product development and engineering to drive improvements in technical product quality and customer experience.</em></p>
+                                <ul>
+                                    <li>Aggregated and prioritized customer-impacting issues to guide quality initiatives, reporting product health through Tableau dashboards and executive summaries.</li>
+                                    <li>Managed lifecycle of 1,000+ bugs across product and engineering, reducing bug introduction rates by 22% while maintaining 91% SLA compliance.</li>
+                                    <li>Delivered prioritized customer insights using sentiment, volume, and revenue risk analysis to influence roadmap decisions.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Friend Space -->
+                    <div class="friends">
+                        <div class="heading">
+                            <h4>Matthew's Friend Space</h4>
+                            <a href="#" class="more">[view all]</a>
+                        </div>
+                        <div class="inner">
+                            <p>Matthew has <span class="count">8</span> friends.</p>
+                            <div class="friends-grid">
+                                <div class="person">
+                                    <img src="anthropiclogo.png" alt="Anthropic">
+                                    <p><a href="https://anthropic.com">Anthropic</a></p>
+                                </div>
+                                <div class="person">
+                                    <img src="openailogo.png" alt="OpenAI">
+                                    <p><a href="https://openai.com">OpenAI</a></p>
+                                </div>
+                                <div class="person">
+                                    <img src="linkedinlogo.png" alt="LinkedIn">
+                                    <p><a href="https://linkedin.com">LinkedIn</a></p>
+                                </div>
+                                <div class="person">
+                                    <img src="eventbritelogo.png" alt="Eventbrite">
+                                    <p><a href="https://eventbrite.com">Eventbrite</a></p>
+                                </div>
+                                <div class="person">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='95' height='95' viewBox='0 0 95 95'%3E%3Crect fill='%23181717' width='95' height='95' rx='8'/%3E%3Cpath d='M47.5 15C29.6 15 15 29.6 15 47.5c0 14.4 9.3 26.5 22.2 30.8 1.6.3 2.2-.7 2.2-1.6v-5.5c-9 2-10.9-4.3-10.9-4.3-1.5-3.8-3.6-4.8-3.6-4.8-2.9-2 .2-2 .2-2 3.2.2 4.9 3.3 4.9 3.3 2.9 4.9 7.5 3.5 9.3 2.7.3-2.1 1.1-3.5 2-4.3-7.2-.8-14.8-3.6-14.8-16 0-3.5 1.3-6.4 3.3-8.7-.3-.8-1.4-4.1.3-8.6 0 0 2.7-.9 8.9 3.3 2.6-.7 5.3-1.1 8.1-1.1s5.5.4 8.1 1.1c6.2-4.2 8.9-3.3 8.9-3.3 1.8 4.5.7 7.8.3 8.6 2.1 2.3 3.3 5.2 3.3 8.7 0 12.4-7.6 15.2-14.8 16 1.2 1 2.2 3 2.2 6.1v9c0 .9.6 1.9 2.2 1.6C70.7 74 80 61.9 80 47.5 80 29.6 65.4 15 47.5 15z' fill='%23fff'/%3E%3C/svg%3E" alt="GitHub">
+                                    <p><a href="https://github.com">GitHub</a></p>
+                                </div>
+                                <div class="person">
+                                    <img src="mrmet.png" alt="Mr. Met">
+                                    <p><a href="https://www.mlb.com/mets">Mr. Met</a></p>
+                                </div>
+                                <div class="person">
+                                    <img src="chickfilalogo.png" alt="Chick-fil-A">
+                                    <p><a href="https://chick-fil-a.com">Chick-fil-A</a></p>
+                                </div>
+                                <div class="person">
+                                    <img src="empirestate.png" alt="Empire State Building">
+                                    <p><a href="https://www.esbnyc.com">Empire State</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comments / Achievements Section -->
+                    <div class="table-section" id="achievements">
+                        <div class="heading">
+                            <h4>Matthew's Friends' Comments</h4>
+                        </div>
+                    </div>
+                    <table class="comments-table">
+                        <tr>
+                            <td>
+                                <a href="#">Michael Scott</a><br>
+                                <img src="michaelscott.png" alt="Michael Scott">
+                            </td>
+                            <td>
+                                <p class="date">Jan 2, 2026</p>
+                                <p>Matt and I are great friends. We hang out a ton, mostly at work.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p style="display: inline-flex; align-items: center; gap: 4px;">Made with <span style="line-height: 1;">❤️</span></p>
+            <ul class="links">
+                <li><a href="mailto:mattsalemnyc@gmail.com">Contact</a></li>
+                <li><a href="https://linkedin.com/in/matthewisalem">LinkedIn</a></li>
+                <li><a href="matthew-salem-resume.pdf" download>Download Resume</a></li>
+            </ul>
+                    </footer>
+    </div>
+<script>
+    function searchResume() {
+        // Remove previous highlights
+        document.querySelectorAll('.search-highlight').forEach(el => {
+            const text = document.createTextNode(el.textContent);
+            el.parentNode.replaceChild(text, el);
+        });
+        // Normalize text nodes
+        document.querySelector('main').normalize();
+
+        const searchTerm = document.getElementById('resume-search').value.trim();
+        if (!searchTerm) return;
+
+        const main = document.querySelector('main');
+        const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, null, false);
+        const nodesToHighlight = [];
+
+        while (walker.nextNode()) {
+            const node = walker.currentNode;
+            const idx = node.textContent.toLowerCase().indexOf(searchTerm.toLowerCase());
+            if (idx !== -1) {
+                nodesToHighlight.push({ node, idx, len: searchTerm.length });
+            }
+        }
+
+        nodesToHighlight.forEach(({ node, idx, len }) => {
+            const range = document.createRange();
+            range.setStart(node, idx);
+            range.setEnd(node, idx + len);
+            const mark = document.createElement('mark');
+            mark.className = 'search-highlight';
+            mark.style.background = 'yellow';
+            mark.style.padding = '0 2px';
+            range.surroundContents(mark);
+        });
+
+        const firstMatch = document.querySelector('.search-highlight');
+        if (firstMatch) {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    document.getElementById('resume-search').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            searchResume();
+        }
+    });
+</script>
+</body>
+</html>
