@@ -517,6 +517,17 @@
             color: #B50000;
         }
 
+        .view-more-experience {
+            text-align: right;
+            margin-top: 8px;
+            margin-bottom: 0;
+            font-weight: bold;
+        }
+
+        .view-more-experience a {
+            color: #B50000;
+        }
+
         .friend-role {
             font-size: 9px;
             color: var(--dark-gray);
@@ -810,6 +821,27 @@
                         </div>
                     </div>
 
+                    <!-- OPTION 1: Retro Terminal Style -->
+                    <div class="stats-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">C:\MATTHEW\STATS.EXE</span>
+                            <span class="terminal-controls">_ □ ×</span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="terminal-line"><span class="prompt">C:\></span> loading career_stats.dat...</p>
+                            <p class="terminal-line"><span class="prompt">C:\></span> YEARS_EXPERIENCE = <span class="stat-value">15+</span></p>
+                            <p class="terminal-line"><span class="prompt">C:\></span> VOC_PROGRAMS_BUILT = <span class="stat-value">2</span> <span class="stat-label">[GitHub, Eventbrite]</span></p>
+                            <p class="terminal-line"><span class="prompt">C:\></span> COST_REDUCTION = <span class="stat-value">38%</span> <span class="stat-label">[GitHub]</span></p>
+                            <p class="terminal-line"><span class="prompt">C:\></span> CSAT_IMPROVEMENT = <span class="stat-value">11%</span> <span class="stat-label">[GitHub]</span></p>
+                            <p class="terminal-line"><span class="prompt">C:\></span> BUG_REDUCTION = <span class="stat-value">22%</span> <span class="stat-label">[LinkedIn]</span></p>
+                            <p class="terminal-line"><span class="prompt">C:\></span> INTEGRATION_SPEED = <span class="stat-value">+50%</span> <span class="stat-label">[SeatGeek]</span></p>
+                            <p class="terminal-line"><span class="prompt">C:\></span> BUGS_MANAGED = <span class="stat-value">1,000+</span> <span class="stat-label">[LinkedIn]</span></p>
+                            <p class="terminal-line"><span class="prompt">C:\></span> SLA_COMPLIANCE = <span class="stat-value">91%</span> <span class="stat-label">[LinkedIn]</span></p>
+                            <p class="terminal-line typing"><span class="prompt">C:\></span> <span class="cursor">_</span></p>
+                        </div>
+                    </div>
+
+                    
                     <!-- Blurbs Section -->
                     <div class="blurbs" id="about">
                         <div class="heading">
@@ -868,7 +900,8 @@
                                     <li>Introduced Agile practices for integrations team, improving sprint planning, workload visibility, and delivery predictability.</li>
                                 </ul>
                             </div>
-                            <div class="section">
+                            <p class="view-more-experience" id="expand-experience-link"><a href="#" onclick="toggleExperience(event)">View More Experience</a></p>
+                            <div class="section hidden-experience" id="linkedin-experience" style="display: none;">
                                 <h4>LinkedIn | Technical Services Manager, Commerce & Premium | Sept. 2014 – May 2018</h4>
                                 <p><em>Connected customer data to product development and engineering to drive improvements in technical product quality and customer experience.</em></p>
                                 <ul>
@@ -876,6 +909,7 @@
                                     <li>Managed lifecycle of 1,000+ bugs across product and engineering, reducing bug introduction rates by 22% while maintaining 91% SLA compliance.</li>
                                     <li>Delivered prioritized customer insights using sentiment, volume, and revenue risk analysis to influence roadmap decisions.</li>
                                 </ul>
+                                <p class="view-more-experience"><a href="#" onclick="toggleExperience(event)">View Less Experience</a></p>
                             </div>
                         </div>
                     </div>
@@ -1006,6 +1040,79 @@
             searchResume();
         }
     });
+
+    function toggleExperience(event) {
+        event.preventDefault();
+        const linkedinSection = document.getElementById('linkedin-experience');
+        const topLink = document.getElementById('expand-experience-link');
+        if (linkedinSection.style.display === 'none') {
+            linkedinSection.style.display = 'block';
+            topLink.style.display = 'none';
+        } else {
+            linkedinSection.style.display = 'none';
+            topLink.style.display = 'block';
+        }
+    }
 </script>
+
+<style>
+    /* Retro Terminal Stats */
+    .stats-terminal {
+        background: #0a0a0a;
+        border: 3px solid #333;
+        border-radius: 0;
+        margin: 15px 0;
+        font-family: 'Courier New', monospace;
+    }
+    .terminal-header {
+        background: linear-gradient(90deg, #1a1a6e 0%, #2a2a8e 50%, #1a1a6e 100%);
+        padding: 4px 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #333;
+    }
+    .terminal-title {
+        color: #fff;
+        font-size: 11px;
+        font-weight: bold;
+    }
+    .terminal-controls {
+        color: #ccc;
+        font-size: 10px;
+        letter-spacing: 4px;
+    }
+    .terminal-body {
+        padding: 12px 15px;
+        min-height: 140px;
+    }
+    .terminal-line {
+        color: #00ff00;
+        font-size: 12px;
+        margin: 0 0 4px 0;
+        text-shadow: 0 0 5px #00ff00;
+        line-height: 1.5;
+    }
+    .terminal-line .prompt {
+        color: #aaa;
+    }
+    .terminal-line .stat-value {
+        color: #ffff00;
+        font-weight: bold;
+        text-shadow: 0 0 8px #ffff00;
+    }
+    .terminal-line .stat-label {
+        color: #666;
+        font-size: 10px;
+    }
+    .terminal-line.typing .cursor {
+        animation: blink 1s infinite;
+    }
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+
+    </style>
 </body>
 </html>
