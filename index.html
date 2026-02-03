@@ -65,9 +65,11 @@
         p { font-size: max(0.875em, 12px); }
 
         .container {
-            width: 960px;
-            max-width: 100%;
+            width: 100%;
+            max-width: 960px;
             margin: 0 auto 10px;
+            padding: 0 10px;
+            box-sizing: border-box;
         }
 
         /* Navigation */
@@ -627,7 +629,8 @@
         }
 
         /* Two Column Layout */
-        @media (min-width: 30em) {
+        /* Desktop: Two column layout */
+        @media (min-width: 768px) {
             .row {
                 width: 100%;
                 display: table;
@@ -641,12 +644,95 @@
             .col.w-60 { width: 60%; }
         }
 
-        @media (max-width: 30em) {
+        /* Tablet */
+        @media (max-width: 767px) {
+            .row {
+                display: block;
+            }
+            .col {
+                display: block;
+                width: 100% !important;
+            }
+            .col.w-40, .col.w-60 {
+                width: 100% !important;
+            }
+            nav .top {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            nav .top .center {
+                order: 3;
+                width: 100%;
+                margin-top: 5px;
+            }
+            nav .top .center form {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            body {
+                font-size: 90%;
+            }
+            nav .top .right {
+                font-size: 11px;
+            }
+            nav .links {
+                padding: 5px 10px;
+                text-align: center;
+            }
+            nav .links li {
+                display: inline-block;
+                margin: 2px 0;
+            }
+            .profile h1 {
+                font-size: 1.3em;
+            }
+            .general-about {
+                text-align: center;
+            }
+            .general-about .profile-pic {
+                float: none;
+                margin: 0 auto 10px;
+            }
+            .general-about .profile-pic img {
+                width: 140px;
+                height: 140px;
+            }
             .friends-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .profile .friends .person img {
+                max-width: 70px;
+                max-height: 70px;
             }
             .contact-grid {
                 grid-template-columns: 1fr;
+            }
+            .stats-terminal {
+                font-size: 11px;
+            }
+            .terminal-line {
+                font-size: 11px;
+                word-break: break-word;
+            }
+            .comments-table td:first-child {
+                width: 30%;
+            }
+            .comments-table td:first-child img {
+                width: 60px;
+                max-height: 60px;
+            }
+            .details-table td:first-child {
+                width: 30%;
             }
         }
     </style>
